@@ -1,4 +1,5 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import ListItemStyled from "./styled/ListItemStyled";
 
 const Header = () => {
   return (
@@ -17,17 +18,15 @@ const Header = () => {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto m-auto">
-          <li className="nav-item active">
-            <p className="nav-link">Characters</p>
-          </li>
-          <li className="nav-item">
-            {" "}
-            <p className="nav-link">Episodes</p>
-          </li>
-          <li className="nav-item">
-            {" "}
-            <p className="nav-link">Locations</p>
-          </li>
+          <ListItemStyled>
+            <Link to="/">Characters</Link>
+          </ListItemStyled>
+          <ListItemStyled>
+            <Link to="/episodes">Episodes</Link>
+          </ListItemStyled>
+          <ListItemStyled>
+            <Link to="/locations">Locations</Link>
+          </ListItemStyled>
         </ul>
       </div>
     </nav>

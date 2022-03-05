@@ -1,18 +1,50 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
 import Characters from "./pages/Characters";
 import Episodes from "./pages/Episodes";
 import Location from "./pages/Locations";
 
-const AppRouting = (props) => {
+const LayoutWithHeader = ({ children, ...rest }) => {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" component={Characters} />
-        <Route exact path="/episodes" component={Episodes} />
-        <Route exact path="/episodes" component={Location} />
-      </Switch>
-    </Router>
+    <>
+      <Header {...rest} />
+      {children}
+    </>
   );
 };
+
+const AppRouting = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <LayoutWithHeader>
+              <Characters />
+            </LayoutWithHeader>
+          }
+        />
+        <Route
+          path="/episodes"
+          element={
+            <LayoutWithHeader>
+              <Episodes />
+            </LayoutWithHeader>
+          }
+        />
+        <Route
+          path="/locations"
+          element={
+            <LayoutWithHeader>
+              <Location />
+            </LayoutWithHeader>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
 export default AppRouting;

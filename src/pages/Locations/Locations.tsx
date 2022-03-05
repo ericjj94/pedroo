@@ -3,29 +3,44 @@ import { useQuery } from "@apollo/client";
 import { Row, Col } from "reactstrap";
 import { GET_ALL_LOCATIONS } from "./query";
 import DataTable from "../../components/Table/Table";
-
-const columns = [
-  {
-    Header: "ID",
-    accessor: "id",
-  },
-  {
-    Header: "Name",
-    accessor: "name",
-  },
-  {
-    Header: "Type",
-    accessor: "type",
-  },
-  {
-    Header: "Dimension",
-    accessor: "dimension",
-  },
-];
+import { NameStyle } from "../../styled";
 
 const Locations = () => {
   const [locationData, setLocationData] = useState([]);
   const [page, setPage] = useState(0);
+
+  const handleRedirection = (props: any) => {
+    console.log("props", props);
+  };
+
+  const columns = [
+    {
+      Header: "Name",
+      accessor: "name",
+      Cell: (props: any) => {
+        return (
+          <NameStyle
+            onClick={() => {
+              handleRedirection(props);
+            }}
+          >
+            {props.value}
+          </NameStyle>
+        );
+      },
+    },
+    {
+      Header: "Type",
+      accessor: "type",
+    },
+    {
+      Header: "Dimension",
+      accessor: "dimension",
+    },
+    {
+      Header: "Action",
+    },
+  ];
 
   const { loading, error, data } = useQuery(GET_ALL_LOCATIONS, {
     variables: {

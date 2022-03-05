@@ -3,11 +3,15 @@ import { useQuery } from "@apollo/client";
 import { Row, Col } from "reactstrap";
 import { GET_ALL_CHARACTERS } from "./query";
 import DataTable from "../../components/Table/Table";
+import { NameStyle } from "../../styled";
 
 const columns = [
   {
     Header: "Name",
     accessor: "name",
+    Cell: (props: any) => {
+      return <NameStyle>{props.value}</NameStyle>;
+    },
   },
   {
     Header: "Species",

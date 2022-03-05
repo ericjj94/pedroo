@@ -1,10 +1,10 @@
 import React from "react";
-import Layout from "./components/Layout";
+import AppRouting from "./routes";
 
 function App() {
   return (
     <div className="App">
-      <Layout />
+      <AppRouting />
     </div>
   );
 }
