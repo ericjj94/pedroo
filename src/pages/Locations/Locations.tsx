@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Row, Col } from "reactstrap";
-import { GET_ALL_EPISODES } from "./query";
+import { GET_ALL_LOCATIONS } from "./query";
 import DataTable from "../../components/Table/Table";
 
 const columns = [
@@ -14,30 +14,28 @@ const columns = [
     accessor: "name",
   },
   {
-    Header: "Episode",
-    accessor: "episode",
+    Header: "Type",
+    accessor: "type",
   },
   {
-    Header: "Air date",
-    accessor: "air_date",
+    Header: "Dimension",
+    accessor: "dimension",
   },
 ];
 
-const Episodes = () => {
-  const [episodesData, setEpisodesData] = useState([]);
+const Locations = () => {
+  const [locationData, setLocationData] = useState([]);
   const [page, setPage] = useState(0);
 
-  const { loading, error, data } = useQuery(GET_ALL_EPISODES, {
+  const { loading, error, data } = useQuery(GET_ALL_LOCATIONS, {
     variables: {
       page: page + 1,
     },
   });
 
-  console.log("data", data?.episodes.results);
-
   useEffect(() => {
-    if (data?.episodes?.results.length) {
-      setEpisodesData((prev) => [...prev, ...data.episodes.results] as []);
+    if (data?.locations?.results.length) {
+      setLocationData((prev) => [...prev, ...data.locations.results] as []);
     }
   }, [data]);
 
@@ -57,13 +55,13 @@ const Episodes = () => {
     <Col className="container">
       <Col sm={12}>
         <Row>
-          <h2>Episodes</h2>
+          <h2>Locations</h2>
         </Row>
       </Col>
       <Col sm={12}>
-        <DataTable columns={columns} data={episodesData} page={page} handlePageChange={handlePageChange} />
+        <DataTable columns={columns} data={locationData} page={page} handlePageChange={handlePageChange} />
       </Col>
     </Col>
   );
 };
-export default Episodes;
+export default Locations;

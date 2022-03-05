@@ -1,4 +1,6 @@
 import Characters from "../../pages/Characters";
+import Episodes from "../../pages/Episodes";
+import Locations from "../../pages/Locations";
 import Header from "../Header";
 
 const Layout = () => {

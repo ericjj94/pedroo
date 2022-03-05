@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Characters from "./pages/Characters";
 import Episodes from "./pages/Episodes";
-import Location from "./pages/Location";
+import Location from "./pages/Locations";
 
 const AppRouting = (props) => {
   return (
