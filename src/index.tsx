@@ -11,7 +11,9 @@ import rootReducer from "./reducers/rootReducers";
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_API,
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    addTypename: false,
+  }),
 });
 
 const store = createStore(rootReducer);

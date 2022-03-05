@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Row, Col } from "reactstrap";
 import { GET_ALL_LOCATIONS } from "./query";
-import DataTable from "../../components/Table/Table";
 import { NameStyle } from "../../styled";
+import PaginationTable from "../../components/Table/Table";
 
 const Locations = () => {
   const [locationData, setLocationData] = useState([]);
@@ -73,9 +73,7 @@ const Locations = () => {
           <h2>Locations</h2>
         </Row>
       </Col>
-      <Col sm={12}>
-        <DataTable columns={columns} data={locationData} page={page} handlePageChange={handlePageChange} />
-      </Col>
+      <Col sm={12}>{/* <PaginationTable /> */}</Col>
     </Col>
   );
 };

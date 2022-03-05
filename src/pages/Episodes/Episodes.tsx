@@ -64,9 +64,7 @@ const Episodes = () => {
           <h2>Episodes</h2>
         </Row>
       </Col>
-      <Col sm={12}>
-        <DataTable columns={columns} data={episodesData} page={page} handlePageChange={handlePageChange} />
-      </Col>
+      <Col sm={12}></Col>
     </Col>
   );
 };
