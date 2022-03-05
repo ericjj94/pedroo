@@ -1,0 +1,12 @@
+ {
+     "name": "rick and morty graphql schema",
+     "schemaPath": "schema.graphql",
+     "extensions": {
+         "endpoints": {
+             "Default GraphQL Endpoint": {
+                 "url": "https://rickandmortyapi.com/graphql", 
+             },
+             "interospect": false
+         } 
+     }
+ }
