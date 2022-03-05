@@ -9,9 +9,7 @@ const Locations = () => {
   const [locationData, setLocationData] = useState([]);
   const [page, setPage] = useState(0);
 
-  const handleRedirection = (props: any) => {
-    console.log("props", props);
-  };
+  const handleRedirection = (props: any) => {};
 
   const columns = [
     {

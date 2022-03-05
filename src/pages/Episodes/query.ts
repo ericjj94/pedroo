@@ -7,10 +7,10 @@ const GET_ALL_EPISODES = gql`
         pages
       }
       results {
-        name
-        episode
         id
+        name
         air_date
+        episode
       }
     }
   }

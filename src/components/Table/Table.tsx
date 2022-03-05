@@ -1,4 +1,8 @@
-import { Paper, Table, TableBody, TableContainer, TablePagination, Theme } from "@mui/material";
+/*  The table component is inspired from Material UI. The component allows the rendering of the table and pagination using 
+ MUI pagination with some minor features like sorting.
+*/
+
+import { Paper, Table, TableBody, TableContainer, TablePagination } from "@mui/material";
 import { TableCell, TableHead, TableRow, TableSortLabel } from "@mui/material";
 import React from "react";
 
@@ -123,7 +127,6 @@ const DataTable: React.FC<IDataTableProps> = ({ columnData, rows, page, setPage 
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
-    console.log("changing page", newPage);
     setPage(newPage);
   };
 
@@ -149,9 +152,9 @@ const DataTable: React.FC<IDataTableProps> = ({ columnData, rows, page, setPage 
               <TableBody>
                 {stableSort(rows, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
+                  .map((row, index) => {
                     return (
-                      <TableRow>
+                      <TableRow key={index}>
                         {Object.keys(row).map((key, index) => {
                           return (
                             <TableCell

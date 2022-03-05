@@ -1,31 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
-import { Row, Col } from "reactstrap";
 import { GET_ALL_EPISODES } from "./query";
-import DataTable from "../../components/Table/Table";
-import { NameStyle } from "../../styled";
-
-const columns = [
-  {
-    Header: "ID",
-    accessor: "id",
-  },
-  {
-    Header: "Name",
-    accessor: "name",
-    Cell: (props: any) => {
-      return <NameStyle>{props.value}</NameStyle>;
-    },
-  },
-  {
-    Header: "Episode",
-    accessor: "episode",
-  },
-  {
-    Header: "Air date",
-    accessor: "air_date",
-  },
-];
+import PaginationTable from "../../components/Table/Table";
 
 const Episodes = () => {
   const [episodesData, setEpisodesData] = useState([]);
@@ -35,37 +11,58 @@ const Episodes = () => {
     variables: {
       page: page + 1,
     },
+    skip: page % 3 !== 0,
   });
-
-  console.log("data", data?.episodes.results);
 
   useEffect(() => {
     if (data?.episodes?.results.length) {
-      setEpisodesData((prev) => [...prev, ...data.episodes.results] as []);
+      setEpisodesData((prev) => [...prev, ...data?.episodes?.results] as []);
     }
   }, [data]);
 
-  if (loading) {
+  if (loading && page === 0) {
     return <div>isloading</div>;
   }
 
-  const handlePageChange = (type: string) => {
-    if (type === "next") {
-      setPage(page + 1);
-    } else {
-      setPage(page - 1);
-    }
-  };
-
   return (
-    <Col className="container">
-      <Col sm={12}>
-        <Row>
-          <h2>Episodes</h2>
-        </Row>
-      </Col>
-      <Col sm={12}></Col>
-    </Col>
+    <div className="container">
+      <div className="row">
+        <h2>Episodes</h2>
+      </div>
+      <div className="row">
+        <PaginationTable
+          columnData={[
+            {
+              id: "id",
+              name: "SNo",
+              enableSort: true,
+              align: "center",
+            },
+            {
+              id: "name",
+              name: "Name",
+              enableSort: true,
+              align: "center",
+            },
+            {
+              id: "air_date",
+              name: "Air Date",
+              enableSort: true,
+              align: "center",
+            },
+            {
+              id: "episode",
+              name: "Episode",
+              enableSort: true,
+              align: "center",
+            },
+          ]}
+          rows={episodesData}
+          page={page}
+          setPage={setPage}
+        />
+      </div>
+    </div>
   );
 };
 export default Episodes;

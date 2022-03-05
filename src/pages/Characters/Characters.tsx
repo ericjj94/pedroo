@@ -47,14 +47,21 @@ const Characters = () => {
               align: "center",
             },
             {
-              id: "gender",
-              name: "Gender",
+              id: "status",
+              name: "Status",
               enableSort: true,
               align: "center",
             },
             {
-              id: "status",
-              name: "Status",
+              id: "species",
+              name: "Species",
+              enableSort: true,
+              align: "center",
+            },
+
+            {
+              id: "gender",
+              name: "gender",
               enableSort: true,
               align: "center",
             },
@@ -71,10 +78,8 @@ const Characters = () => {
               align: "center",
             },
             {
-              id: "Action",
+              id: "action",
               name: "Action",
-              enableSort: true,
-              align: "center",
             },
           ]}
           rows={charactersData}
