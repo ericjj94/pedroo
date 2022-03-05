@@ -3,6 +3,8 @@ import { useQuery } from "@apollo/client";
 import { GET_ALL_LOCATIONS } from "./query";
 import Table from "../../components/Table/Table";
 import Loader from "../../components/Loader";
+import { LocationType } from "../../state";
+import { TitleStyle } from "../../styled";
 
 const Locations = () => {
   const [locationData, setLocationData] = useState([]);
@@ -17,7 +19,12 @@ const Locations = () => {
 
   useEffect(() => {
     if (data?.locations?.results.length) {
-      setLocationData((prev) => [...prev, ...data?.locations?.results] as []);
+      // TODO: change the any type to location specific
+      const updatedResults = data?.locations?.results.map((item: LocationType) => ({
+        ...item,
+        created: new Date(item.created).toDateString(),
+      }));
+      setLocationData((prev) => [...prev, ...updatedResults] as []);
     }
   }, [data]);
 
@@ -28,7 +35,7 @@ const Locations = () => {
   return (
     <div className="container">
       <div className="row">
-        <h2>Locations</h2>
+        <TitleStyle>Locations</TitleStyle>
       </div>
       <div className="row">
         <Table

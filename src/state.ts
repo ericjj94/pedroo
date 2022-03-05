@@ -16,3 +16,16 @@ export interface CharacterType {
     name: string;
   };
 }
+
+export interface EpisodeType {
+  id: number;
+  name: string;
+  air_date: string;
+  episode: string;
+}
+export interface LocationType {
+  name: string;
+  type: string;
+  dimension: string;
+  created: string;
+}

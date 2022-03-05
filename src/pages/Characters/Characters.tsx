@@ -4,6 +4,7 @@ import { GET_ALL_CHARACTERS } from "./query";
 import Table from "../../components/Table/Table";
 import { CharacterType } from "../../state";
 import Loader from "../../components/Loader";
+import { TitleStyle } from "../../styled";
 
 const Characters = () => {
   const [charactersData, setCharactersData] = useState([]);
@@ -36,7 +37,7 @@ const Characters = () => {
   return (
     <div className="container">
       <div className="row">
-        <h2>Characters</h2>
+        <TitleStyle>Characters</TitleStyle>
       </div>
       <div className="row">
         <Table

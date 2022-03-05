@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { GET_ALL_EPISODES } from "./query";
 import Table from "../../components/Table/Table";
 import Loader from "../../components/Loader";
+import { TitleStyle } from "../../styled";
 
 const Episodes = () => {
   const [episodesData, setEpisodesData] = useState([]);
@@ -28,7 +29,7 @@ const Episodes = () => {
   return (
     <div className="container">
       <div className="row">
-        <h2>Episodes</h2>
+        <TitleStyle>Episodes</TitleStyle>
       </div>
       <div className="row">
         <Table
