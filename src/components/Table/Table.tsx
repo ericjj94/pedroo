@@ -70,7 +70,7 @@ const DataTableHead: React.FC<IDataTableHeadProps> = ({ columns, order, orderBy,
       <TableHead>
         <TableRow>
           {columns.map((column) => (
-            <TableCell key={column.id} align="left" sortDirection={orderBy === column.id ? order : false}>
+            <TableCell key={column.id} align="center" sortDirection={orderBy === column.id ? order : false}>
               {column.enableSort ? (
                 <TableSortLabel
                   active={orderBy === column.id}

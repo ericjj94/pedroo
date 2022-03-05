@@ -1,4 +1,3 @@
-import { actions } from "react-table";
 import { ActionType } from "../state";
 
 const initialState = {
@@ -10,7 +9,7 @@ interface GlobalReducerInterface {
 }
 
 const globalsReducer = (state: GlobalReducerInterface = initialState, action: ActionType) => {
-  switch (actions.type) {
+  switch (action.type) {
     case "SET_LOADING": {
       return {
         ...state,
