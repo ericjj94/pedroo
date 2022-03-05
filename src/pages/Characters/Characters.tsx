@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_CHARACTERS } from "./query";
-import PaginationTable from "../../components/Table/Table";
+import Table from "../../components/Table/Table";
 import { CharacterType } from "../../state";
+import Loader from "../../components/Loader";
 
 const Characters = () => {
   const [charactersData, setCharactersData] = useState([]);
@@ -29,7 +30,7 @@ const Characters = () => {
   }, [data]);
 
   if (loading && page === 0) {
-    return <div>isloading</div>;
+    return <Loader />;
   }
 
   return (
@@ -38,7 +39,7 @@ const Characters = () => {
         <h2>Characters</h2>
       </div>
       <div className="row">
-        <PaginationTable
+        <Table
           columnData={[
             {
               id: "name",

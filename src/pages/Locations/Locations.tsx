@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_LOCATIONS } from "./query";
-import PaginationTable from "../../components/Table/Table";
+import Table from "../../components/Table/Table";
+import Loader from "../../components/Loader";
 
 const Locations = () => {
   const [locationData, setLocationData] = useState([]);
@@ -21,7 +22,7 @@ const Locations = () => {
   }, [data]);
 
   if (loading && page === 0) {
-    return <div>isloading</div>;
+    return <Loader />;
   }
 
   return (
@@ -30,7 +31,7 @@ const Locations = () => {
         <h2>Locations</h2>
       </div>
       <div className="row">
-        <PaginationTable
+        <Table
           columnData={[
             {
               id: "name",
