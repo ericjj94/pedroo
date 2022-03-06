@@ -8,12 +8,13 @@ import { TitleStyle } from "../../styled";
 const Episodes = () => {
   const [episodesData, setEpisodesData] = useState([]);
   const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { loading, error, data } = useQuery(GET_ALL_EPISODES, {
     variables: {
-      page: page + 1,
+      page: currentPage,
     },
-    skip: page % 3 !== 0,
   });
 
   useEffect(() => {
@@ -22,9 +23,13 @@ const Episodes = () => {
     }
   }, [data]);
 
-  if (loading && page === 0) {
+  if (loading) {
     return <Loader />;
   }
+
+  const updateCurrentPage = () => {
+    setCurrentPage((prev) => prev + 1);
+  };
 
   return (
     <div className="container">
@@ -34,12 +39,6 @@ const Episodes = () => {
       <div className="row">
         <Table
           columnData={[
-            {
-              id: "id",
-              name: "SNo",
-              enableSort: true,
-              align: "center",
-            },
             {
               id: "name",
               name: "Name",
@@ -58,10 +57,18 @@ const Episodes = () => {
               enableSort: true,
               align: "center",
             },
+            {
+              id: "action",
+              name: "Action",
+              enableSort: true,
+            },
           ]}
           rows={episodesData}
           page={page}
+          rowsPerPage={rowsPerPage}
+          setRowsPerPage={setRowsPerPage}
           setPage={setPage}
+          updateCurrentPage={updateCurrentPage}
         />
       </div>
     </div>

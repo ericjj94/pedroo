@@ -9,17 +9,17 @@ import { TitleStyle } from "../../styled";
 const Locations = () => {
   const [locationData, setLocationData] = useState([]);
   const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { loading, error, data } = useQuery(GET_ALL_LOCATIONS, {
     variables: {
-      page: page + 1,
+      page: currentPage,
     },
-    skip: page % 3 !== 0,
   });
 
   useEffect(() => {
     if (data?.locations?.results.length) {
-      // TODO: change the any type to location specific
       const updatedResults = data?.locations?.results.map((item: LocationType) => ({
         ...item,
         created: new Date(item.created).toDateString(),
@@ -28,9 +28,13 @@ const Locations = () => {
     }
   }, [data]);
 
-  if (loading && page === 0) {
+  if (loading) {
     return <Loader />;
   }
+
+  const updateCurrentPage = () => {
+    setCurrentPage((prev) => prev + 1);
+  };
 
   return (
     <div className="container">
@@ -64,10 +68,18 @@ const Locations = () => {
               enableSort: true,
               align: "center",
             },
+            {
+              id: "action",
+              name: "Action",
+              enableSort: true,
+            },
           ]}
           rows={locationData}
           page={page}
           setPage={setPage}
+          setRowsPerPage={setRowsPerPage}
+          rowsPerPage={rowsPerPage}
+          updateCurrentPage={updateCurrentPage}
         />
       </div>
     </div>

@@ -25,6 +25,9 @@ interface IDataTableProps {
   columnData?: IDataTableColumn[];
   page: number;
   setPage: Function;
+  setRowsPerPage: Function;
+  rowsPerPage: number;
+  updateCurrentPage: Function;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -90,7 +93,15 @@ const DataTableHead: React.FC<IDataTableHeadProps> = ({ columns, order, orderBy,
   );
 };
 
-const DataTable: React.FC<IDataTableProps> = ({ columnData, rows, page, setPage }): JSX.Element => {
+const DataTable: React.FC<IDataTableProps> = ({
+  columnData,
+  rows,
+  page,
+  setPage,
+  setRowsPerPage,
+  rowsPerPage,
+  updateCurrentPage,
+}): JSX.Element => {
   let internalColumnData: IDataTableColumn[] = [
     {
       id: "",
@@ -115,10 +126,8 @@ const DataTable: React.FC<IDataTableProps> = ({ columnData, rows, page, setPage 
     internalColumnData = columnData;
   }
 
-  //   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof any>("");
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof any) => {
     const isAsc = orderBy === property && order === "asc";
@@ -127,7 +136,11 @@ const DataTable: React.FC<IDataTableProps> = ({ columnData, rows, page, setPage 
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
+    console.log("newPage", newPage);
     setPage(newPage);
+    if (newPage % 3 === 0) {
+      updateCurrentPage();
+    }
   };
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -177,7 +190,7 @@ const DataTable: React.FC<IDataTableProps> = ({ columnData, rows, page, setPage 
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
+            rowsPerPageOptions={[5]}
             count={rows.length}
             rowsPerPage={rowsPerPage}
             page={page}

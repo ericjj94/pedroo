@@ -9,13 +9,18 @@ import { TitleStyle } from "../../styled";
 const Characters = () => {
   const [charactersData, setCharactersData] = useState([]);
   const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { loading, error, data } = useQuery(GET_ALL_CHARACTERS, {
     variables: {
-      page: page + 1,
+      page: currentPage,
     },
-    skip: page % 3 !== 0,
   });
+
+  const updateCurrentPage = () => {
+    setCurrentPage((prev) => prev + 1);
+  };
 
   useEffect(() => {
     if (data?.characters?.results.length) {
@@ -30,7 +35,7 @@ const Characters = () => {
     }
   }, [data]);
 
-  if (loading && page === 0) {
+  if (loading) {
     return <Loader />;
   }
 
@@ -87,6 +92,9 @@ const Characters = () => {
           rows={charactersData}
           page={page}
           setPage={setPage}
+          rowsPerPage={rowsPerPage}
+          setRowsPerPage={setRowsPerPage}
+          updateCurrentPage={updateCurrentPage}
         />
       </div>
     </div>

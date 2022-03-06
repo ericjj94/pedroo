@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const GET_ALL_LOCATIONS = gql`
-  query LOCATIONS {
-    locations(page: 1) {
+  query Locations($page: Int) {
+    locations(page: $page) {
       info {
         pages
       }
