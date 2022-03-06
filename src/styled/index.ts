@@ -7,3 +7,20 @@ export const NameStyle = styled.b`
 export const TitleStyle = styled.h2`
   margin: 15px 0;
 `;
+
+export const ProfileImage = styled.img`
+  border-radius: 50%;
+  height: 260px;
+  width: 300px;
+`;
+
+export const ButtonStyle = styled.button`
+  background-color: #0072e4;
+  color: white;
+  padding: 1em 1.5em;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 10px;
+  margin: 2rem 0;
+`;
