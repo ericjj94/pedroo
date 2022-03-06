@@ -17,6 +17,7 @@ const GET_CHARACTER = gql`
       episode {
         name
         air_date
+        id
       }
     }
   }

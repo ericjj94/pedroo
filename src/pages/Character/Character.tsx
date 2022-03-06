@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Card from "../../components/Card";
 import Loader from "../../components/Loader";
 import { EpisodeType } from "../../state";
@@ -10,6 +10,7 @@ import { GET_CHARACTER } from "./query";
 const size = 20;
 
 const Character = () => {
+  const navigate = useNavigate();
   const [showAll, setShowAll] = useState(false);
   const [characterEpisodes, setCharacterEpisodes] = useState([]);
   const params = useParams();
@@ -31,15 +32,35 @@ const Character = () => {
     return <Loader />;
   }
 
+  const handleEpisodeClick = (selectedEpisodeId: number) => {
+    console.log("selectedEpisode", selectedEpisodeId);
+    navigate(`/episodes/${selectedEpisodeId}`);
+  };
+
   const renderEpisodes = () => {
     return characterEpisodes.map((item: EpisodeType, index: number) => (
-      <Card key={index} title={item.name} description={`The episode was aired on ${item.air_date}`} />
+      <Card
+        onClick={handleEpisodeClick}
+        key={index}
+        data={{ title: item.name, description: `The episode was aired on ${item.air_date}`, id: item.id }}
+      />
     ));
   };
 
   const handleShowAll = () => {
     setShowAll(true);
     setCharacterEpisodes(data.character.episode);
+  };
+
+  const renderShowAll = () => {
+    if (!showAll && data.character.episode.length > 20) {
+      return (
+        <div className="row">
+          <ButtonStyle onClick={handleShowAll}>Show All</ButtonStyle>
+        </div>
+      );
+    }
+    return null;
   };
 
   if (data?.character) {
@@ -68,11 +89,7 @@ const Character = () => {
               </p>
             </div>
             <div className="row">{renderEpisodes()}</div>
-            {!showAll && data.character.episode.length > 20 ? (
-              <div className="row">
-                <ButtonStyle onClick={handleShowAll}>Show All</ButtonStyle>
-              </div>
-            ) : null}
+            {renderShowAll()}
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import Characters from "./pages/Characters";
 import Episodes from "./pages/Episodes";
 import Location from "./pages/Locations";
 import Character from "./pages/Character";
+import Episode from "./pages/Episode";
 
 const LayoutWithHeader = ({ children, ...rest }) => {
   return (
@@ -44,10 +45,20 @@ const AppRouting = () => {
           }
         />
         <Route
+          exact
           path="/characters/:id"
           element={
             <LayoutWithHeader>
               <Character />
+            </LayoutWithHeader>
+          }
+        />
+        <Route
+          exact
+          path="/episodes/:id"
+          element={
+            <LayoutWithHeader>
+              <Episode />
             </LayoutWithHeader>
           }
         />
