@@ -1,3 +1,5 @@
+import { CardWrapper } from "./styled";
+
 interface CardInterface {
   data: { title?: string; description?: string; id: number };
   onClick?: Function;
@@ -6,9 +8,8 @@ interface CardInterface {
 
 const Card = ({ data: { title, description, id }, onClick, image }: CardInterface) => {
   return (
-    <div
+    <CardWrapper
       className="card"
-      style={{ width: "18rem", margin: "0.5rem", cursor: "pointer" }}
       onClick={() => {
         if (onClick) {
           onClick(id);
@@ -20,7 +21,7 @@ const Card = ({ data: { title, description, id }, onClick, image }: CardInterfac
         <h5 className="card-title">{title}</h5>
         <p className="card-text">{description}</p>
       </div>
-    </div>
+    </CardWrapper>
   );
 };
 export default Card;

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import Card from "../../components/Card";
 import Loader from "../../components/Loader";
 import { EpisodeType } from "../../state";
-import { ProfileImage, TitleStyle, ButtonStyle } from "../../styled";
+import { ProfileImage, TitleStyle, ButtonStyle, SmallMainSectionStyled } from "../../styled";
 import { GET_CHARACTER } from "./query";
 
 const size = 20;
@@ -67,7 +67,7 @@ const Character = () => {
     return (
       <div className="container mt-3">
         <div className="row">
-          <div className="col-md-3" style={{ backgroundColor: "#F8F9FA", paddingTop: "1rem", paddingLeft: "1rem" }}>
+          <SmallMainSectionStyled className="col-md-3">
             <div className="row">
               <ProfileImage src={data.character.image} alt="profile"></ProfileImage>
             </div>
@@ -79,8 +79,8 @@ const Character = () => {
               </p>
               <p>{data.character.status}</p>
             </div>
-          </div>
-          <div className="col-md-9" style={{ backgroundColor: "#F8F9FA" }}>
+          </SmallMainSectionStyled>
+          <SmallMainSectionStyled className="col-md-9">
             <div className="row">
               <p>
                 {data.character.name} was a part of {data.character.episode.length} episodes. His information has been
@@ -90,7 +90,7 @@ const Character = () => {
             </div>
             <div className="row">{renderEpisodes()}</div>
             {renderShowAll()}
-          </div>
+          </SmallMainSectionStyled>
         </div>
       </div>
     );

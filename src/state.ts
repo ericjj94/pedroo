@@ -9,6 +9,7 @@ export interface CharacterType {
   species: string;
   id: number;
   gender: string;
+
   image?: string;
   location: {
     name: string;
