@@ -3,9 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Characters from "./pages/Characters";
 import Episodes from "./pages/Episodes";
-import Location from "./pages/Locations";
+import Locations from "./pages/Locations";
 import Character from "./pages/Character";
 import Episode from "./pages/Episode";
+import Location from "./pages/Location";
 
 const LayoutWithHeader = ({ children, ...rest }) => {
   return (
@@ -40,7 +41,7 @@ const AppRouting = () => {
           path="/locations"
           element={
             <LayoutWithHeader>
-              <Location />
+              <Locations />
             </LayoutWithHeader>
           }
         />
@@ -59,6 +60,15 @@ const AppRouting = () => {
           element={
             <LayoutWithHeader>
               <Episode />
+            </LayoutWithHeader>
+          }
+        />
+        <Route
+          exact
+          path="/locations/:id"
+          element={
+            <LayoutWithHeader>
+              <Location />
             </LayoutWithHeader>
           }
         />

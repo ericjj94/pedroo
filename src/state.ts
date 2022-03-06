@@ -31,4 +31,6 @@ export interface LocationType {
   type: string;
   dimension: string;
   created: string;
+  image?: string;
+  id: number;
 }

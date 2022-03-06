@@ -11,6 +11,7 @@ const GET_CHARACTER = gql`
         name
         type
         dimension
+        id
       }
       image
       created

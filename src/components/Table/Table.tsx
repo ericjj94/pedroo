@@ -136,7 +136,6 @@ const DataTable: React.FC<IDataTableProps> = ({
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
-    console.log("newPage", newPage);
     setPage(newPage);
     if (newPage % 3 === 0) {
       updateCurrentPage();

@@ -33,7 +33,6 @@ const Character = () => {
   }
 
   const handleEpisodeClick = (selectedEpisodeId: number) => {
-    console.log("selectedEpisode", selectedEpisodeId);
     navigate(`/episodes/${selectedEpisodeId}`);
   };
 
@@ -63,6 +62,10 @@ const Character = () => {
     return null;
   };
 
+  const handleViewNeighbours = () => {
+    navigate(`/locations/${data.character.location.id}`);
+  };
+
   if (data?.character) {
     return (
       <div className="container mt-3">
@@ -78,6 +81,9 @@ const Character = () => {
                 Lives in <b>{data.character.location.name}</b>
               </p>
               <p>{data.character.status}</p>
+              <div className="row">
+                <ButtonStyle onClick={handleViewNeighbours}>View neighbours</ButtonStyle>
+              </div>
             </div>
           </SmallMainSectionStyled>
           <SmallMainSectionStyled className="col-md-9">
