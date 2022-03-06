@@ -1,6 +1,6 @@
 # API explorer for Rick and Morty API
 
-This project was bootstrapped with [Create React App] (https://github.com/facebook/create-react-app). and uses Typescript as a template.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and uses Typescript as a template.
 
 ## About the application
 

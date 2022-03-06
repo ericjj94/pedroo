@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import Card from "../../components/Card";
 import Loader from "../../components/Loader";
 import { EpisodeType, LocationType } from "../../state";
-import { ProfileImage, TitleStyle, ButtonStyle, SmallMainSectionStyled } from "../../styled";
+import { ProfileImage, TitleStyle, ButtonStyle, MainSectionStyled } from "../../styled";
 import { GET_LOCATION_BY_ID } from "./query";
 
 const size = 20;
@@ -38,7 +38,7 @@ const Character = () => {
     return (
       <div className="container mt-3">
         <div className="row">
-          <SmallMainSectionStyled className="col-md-3">
+          <MainSectionStyled className="col-md-3">
             <div className="row">
               <TitleStyle>{data.location.name}</TitleStyle>
               <p>{data.location.species}</p>
@@ -47,8 +47,8 @@ const Character = () => {
               </p>
               <p>{data.location.status}</p>
             </div>
-          </SmallMainSectionStyled>
-          <SmallMainSectionStyled className="col-md-9">
+          </MainSectionStyled>
+          <MainSectionStyled className="col-md-9">
             <div className="row">
               <p>
                 {data.location.name} has {data.location.residents.length} residents. Following are the list of residents
@@ -56,7 +56,7 @@ const Character = () => {
               </p>
             </div>
             <div className="row">{renderResidents()}</div>
-          </SmallMainSectionStyled>
+          </MainSectionStyled>
         </div>
       </div>
     );

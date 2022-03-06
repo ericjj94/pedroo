@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import Card from "../../components/Card";
 import Loader from "../../components/Loader";
 import { CharacterType } from "../../state";
-import { SmallMainSectionStyled, TitleStyle } from "../../styled";
+import { MainSectionStyled, TitleStyle } from "../../styled";
 import { GET_EPISODE_BY_ID } from "./query";
 
 const Episode = () => {
@@ -38,7 +38,7 @@ const Episode = () => {
     return (
       <div className="container mt-3">
         <div className="row">
-          <SmallMainSectionStyled className="col-md-3">
+          <MainSectionStyled className="col-md-3">
             <div className="row">
               <TitleStyle>{data.episode.name}</TitleStyle>
             </div>
@@ -46,15 +46,15 @@ const Episode = () => {
               <p>Air Date: {data.episode.air_date}</p>
               <p>Episode: {data.episode.episode}</p>
             </div>
-          </SmallMainSectionStyled>
-          <SmallMainSectionStyled className="col-md-9">
+          </MainSectionStyled>
+          <MainSectionStyled className="col-md-9">
             <div className="row">
               <p>
                 The following characters were part of the episode <b>{data.episode.name}</b>
               </p>
             </div>
             <div className="row">{renderCharacters()}</div>
-          </SmallMainSectionStyled>
+          </MainSectionStyled>
         </div>
       </div>
     );

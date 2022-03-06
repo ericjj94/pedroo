@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import Card from "../../components/Card";
 import Loader from "../../components/Loader";
 import { EpisodeType } from "../../state";
-import { ProfileImage, TitleStyle, ButtonStyle, SmallMainSectionStyled } from "../../styled";
+import { ProfileImage, TitleStyle, ButtonStyle, MainSectionStyled } from "../../styled";
 import { GET_CHARACTER } from "./query";
 
 const size = 20;
@@ -70,7 +70,7 @@ const Character = () => {
     return (
       <div className="container mt-3">
         <div className="row">
-          <SmallMainSectionStyled className="col-md-3">
+          <MainSectionStyled className="col-md-3">
             <div className="row">
               <ProfileImage src={data.character.image} alt="profile"></ProfileImage>
             </div>
@@ -85,8 +85,8 @@ const Character = () => {
                 <ButtonStyle onClick={handleViewNeighbours}>View neighbours</ButtonStyle>
               </div>
             </div>
-          </SmallMainSectionStyled>
-          <SmallMainSectionStyled className="col-md-9">
+          </MainSectionStyled>
+          <MainSectionStyled className="col-md-9">
             <div className="row">
               <p>
                 {data.character.name} was a part of {data.character.episode.length} episodes. His information has been
@@ -96,7 +96,7 @@ const Character = () => {
             </div>
             <div className="row">{renderEpisodes()}</div>
             {renderShowAll()}
-          </SmallMainSectionStyled>
+          </MainSectionStyled>
         </div>
       </div>
     );

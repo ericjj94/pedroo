@@ -25,7 +25,7 @@ export const ButtonStyle = styled.button`
   margin: 2rem 0;
 `;
 
-export const SmallMainSectionStyled = styled.div`
+export const MainSectionStyled = styled.div`
   background-color: #f8f9fa;
   padding-top: 1rem;
   padding-left: 1rem;
