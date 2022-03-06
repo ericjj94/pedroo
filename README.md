@@ -1,46 +1,62 @@
-# Getting Started with Create React App
+# API explorer for Rick and Morty API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App] (https://github.com/facebook/create-react-app). and uses Typescript as a template.
 
-## Available Scripts
+## About the application
+
+The application is a Single page application that implements the Rick and Morty API with Apollo Client (an open source GraphQL client for the web).
+The application consists of integration of 1. Characters 2. Episodes 3. Locations
+
+The Rick and Morty API uses GraphQL and is hosted here: [https://rickandmortyapi.com/graphql](https://rickandmortyapi.com/graphql).
+
+## Characters
+
+The characters section contains information about all the characters on the show.
+
+## Episodes
+
+The episodes section contains information about all the episodes of the show.
+
+## Locations
+
+The locations section contains information about all the locations mentioned in the show.
+
+## Available Scripts for the application
 
 In the project directory, you can run:
 
 ### `npm start`
 
 Runs the app in the development mode.\
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
+
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
+It correctly bundles React in production mode and optimizes the build for the best performance.
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Additional packages used in the project
 
-### `npm run eject`
+1.  styled-components
+2.  Apollo client
+3.  Material UI
+4.  Bootstrap
+5.  Redux
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Scope of Improvement
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Introducing the implementation of Intersection Observer that will allow the lazy loading of images for an improved first paint.
+2. Adding a theme to the application that would allow the user to change the theme of the app.
+3. Even though the application has redux added, it does not use the state management tool, since data as of now need not be shared across multiple components.
