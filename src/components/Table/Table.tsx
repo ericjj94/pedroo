@@ -28,10 +28,10 @@ interface IDataTableProps {
   setRowsPerPage: Function;
   rowsPerPage: number;
   updateCurrentPage: Function;
+  handleOnRowClick: Function;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
-  console.warn(a, b, orderBy);
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -101,6 +101,7 @@ const DataTable: React.FC<IDataTableProps> = ({
   setRowsPerPage,
   rowsPerPage,
   updateCurrentPage,
+  handleOnRowClick,
 }): JSX.Element => {
   let internalColumnData: IDataTableColumn[] = [
     {
@@ -166,10 +167,14 @@ const DataTable: React.FC<IDataTableProps> = ({
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => {
                     return (
-                      <TableRow key={index}>
+                      <TableRow className={"table-row"} key={index}>
                         {Object.keys(row).map((key, index) => {
                           return (
                             <TableCell
+                              style={{ cursor: "pointer" }}
+                              onClick={() => {
+                                handleOnRowClick(row.id);
+                              }}
                               align={internalColumnData[index].align ? internalColumnData[index].align : "inherit"}
                               key={key}
                             >

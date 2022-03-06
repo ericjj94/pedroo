@@ -3,10 +3,8 @@ import { gql } from "@apollo/client";
 const GET_ALL_EPISODES = gql`
   query Episodes($page: Int) {
     episodes(page: $page) {
-      info {
-        pages
-      }
       results {
+        id
         name
         air_date
         episode

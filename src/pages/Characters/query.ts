@@ -3,10 +3,8 @@ import { gql } from "@apollo/client";
 const GET_ALL_CHARACTERS = gql`
   query Characters($page: Int) {
     characters(page: $page) {
-      info {
-        pages
-      }
       results {
+        id
         name
         status
         species

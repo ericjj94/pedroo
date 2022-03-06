@@ -5,12 +5,14 @@ import Table from "../../components/Table/Table";
 import { CharacterType } from "../../state";
 import Loader from "../../components/Loader";
 import { TitleStyle } from "../../styled";
+import { Navigate, useNavigate } from "react-router";
 
 const Characters = () => {
   const [charactersData, setCharactersData] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
 
   const { loading, error, data } = useQuery(GET_ALL_CHARACTERS, {
     variables: {
@@ -39,6 +41,10 @@ const Characters = () => {
     return <Loader />;
   }
 
+  const handleOnRowClick = (selectedCharacterId: number) => {
+    navigate(`/characters/${selectedCharacterId}`);
+  };
+
   return (
     <div className="container">
       <div className="row">
@@ -47,6 +53,12 @@ const Characters = () => {
       <div className="row">
         <Table
           columnData={[
+            {
+              id: "id",
+              name: "SNo",
+              enableSort: true,
+              align: "center",
+            },
             {
               id: "name",
               name: "Name",
@@ -95,6 +107,7 @@ const Characters = () => {
           rowsPerPage={rowsPerPage}
           setRowsPerPage={setRowsPerPage}
           updateCurrentPage={updateCurrentPage}
+          handleOnRowClick={handleOnRowClick}
         />
       </div>
     </div>
