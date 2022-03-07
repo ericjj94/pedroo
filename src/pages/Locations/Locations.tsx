@@ -34,6 +34,9 @@ const Locations = () => {
   if (loading) {
     return <Loader />;
   }
+  if (error) {
+    return <div className="error">Unable to fetch data</div>;
+  }
 
   const updateCurrentPage = () => {
     setCurrentPage((prev) => prev + 1);
