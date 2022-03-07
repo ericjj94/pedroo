@@ -15,7 +15,7 @@ const Location = () => {
   const params = useParams();
   const [neighbours, setNeighbours] = useState([]);
 
-  const { loading, error, data } = useQuery(GET_LOCATION_BY_ID, {
+  const { loading, data } = useQuery(GET_LOCATION_BY_ID, {
     variables: {
       id: Number(params.id),
     },

@@ -16,7 +16,7 @@ const Character = () => {
   const [characterEpisodes, setCharacterEpisodes] = useState([]);
   const params = useParams();
 
-  const { loading, error, data } = useQuery(GET_CHARACTER, {
+  const { loading, data } = useQuery(GET_CHARACTER, {
     variables: {
       id: Number(params.id),
     },

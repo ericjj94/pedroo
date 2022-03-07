@@ -10,7 +10,7 @@ const Episode = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const { loading, error, data } = useQuery(GET_EPISODE_BY_ID, {
+  const { loading, data } = useQuery(GET_EPISODE_BY_ID, {
     variables: {
       id: Number(params.id),
     },
