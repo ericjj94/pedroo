@@ -25,7 +25,7 @@ const Location = () => {
   }, [data]);
 
   if (loading) {
-    return <Loader />;
+    return <Loader id="loading" />;
   }
 
   const handleCharactersClick = (selectedCharacterId: number) => {

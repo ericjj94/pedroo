@@ -5,14 +5,14 @@ import { act } from "react-dom/test-utils";
 import { wait } from "@testing-library/user-event/dist/utils";
 import { mockLocationData, sampleRow, mockErrorData } from "./mockData";
 
-describe("Episodes Testing", () => {
+describe("Locations Testing", () => {
   it("Should return a component", () => {
     const { component } = mount(<Location />, mockLocationData);
     expect(component.length).toEqual(1);
   });
   it("Should render loading", () => {
     const { component } = mount(<Location />, mockLocationData);
-    expect(component.find(".sc-bdvvtL").length).toEqual(1);
+    expect(component.find("Loader").props().id).toEqual("loading");
   });
 
   it("Should not render table when data is not present", () => {

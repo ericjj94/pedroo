@@ -34,7 +34,7 @@ const Locations = () => {
   }, [data]);
 
   if (loading) {
-    return <Loader />;
+    return <Loader id="loading" />;
   }
 
   const onErrorButtonClick = () => {
