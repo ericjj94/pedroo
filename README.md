@@ -94,4 +94,4 @@ Your app is ready to be deployed!
 
 5. Adding a theme to the application that would allow the user to change the theme of the app.
 
-**_Note: There is an warning coming up from material UI for invalidate DOM Nesting._**
+**_Note: There is an warning coming up from material UI for invalidate DOM Nesting.The env file has been added to Git(which is done on purpose)_**
