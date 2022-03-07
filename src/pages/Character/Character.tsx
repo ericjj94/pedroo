@@ -82,7 +82,9 @@ const Character = () => {
               </p>
               <p>{data.character.status}</p>
               <div className="row">
-                <ButtonStyle onClick={handleViewNeighbours}>View neighbours</ButtonStyle>
+                <ButtonStyle id="view-neighbours" onClick={handleViewNeighbours}>
+                  View neighbours
+                </ButtonStyle>
               </div>
             </div>
           </MainSectionStyled>

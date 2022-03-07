@@ -17,8 +17,8 @@ describe("Characters Testing", () => {
   });
   it("Should render the name of the character", async () => {
     const { component } = mountWithRoute(<Character />, mockCharacterData, {
-      initialRoute: "/projects/1",
-      currentPath: "/projects/:id",
+      initialRoute: "/characters/1",
+      currentPath: "/characters/:id",
     });
 
     await act(() => wait(0));
@@ -27,8 +27,8 @@ describe("Characters Testing", () => {
   });
   it("Should render the location of the character in bold", async () => {
     const { component } = mountWithRoute(<Character />, mockCharacterData, {
-      initialRoute: "/projects/1",
-      currentPath: "/projects/:id",
+      initialRoute: "/characters/1",
+      currentPath: "/characters/:id",
     });
 
     await act(() => wait(0));
@@ -37,8 +37,8 @@ describe("Characters Testing", () => {
   });
   it("Should render the cards of episodes the character has featured in", async () => {
     const { component } = mountWithRoute(<Character />, mockCharacterData, {
-      initialRoute: "/projects/1",
-      currentPath: "/projects/:id",
+      initialRoute: "/characters/1",
+      currentPath: "/characters/:id",
     });
 
     await act(() => wait(0));
@@ -49,8 +49,8 @@ describe("Characters Testing", () => {
 
   it("Should render the name of the episode", async () => {
     const { component } = mountWithRoute(<Character />, mockCharacterData, {
-      initialRoute: "/projects/1",
-      currentPath: "/projects/:id",
+      initialRoute: "/characters/1",
+      currentPath: "/characters/:id",
     });
 
     await act(() => wait(0));
@@ -61,8 +61,8 @@ describe("Characters Testing", () => {
 
   it("Should render the edit and delete button", async () => {
     const { component } = mountWithRoute(<Character />, mockCharacterData, {
-      initialRoute: "/projects/1",
-      currentPath: "/projects/:id",
+      initialRoute: "/characters/1",
+      currentPath: "/characters/:id",
     });
 
     await act(() => wait(0));
@@ -72,8 +72,8 @@ describe("Characters Testing", () => {
   });
   it("Should not render the show all button as the episode is less than 20", async () => {
     const { component } = mountWithRoute(<Character />, mockCharacterData, {
-      initialRoute: "/projects/1",
-      currentPath: "/projects/:id",
+      initialRoute: "/characters/1",
+      currentPath: "/characters/:id",
     });
 
     await act(() => wait(0));
@@ -83,11 +83,21 @@ describe("Characters Testing", () => {
 
   it("Should not render the main content if there's an error fetching data", async () => {
     const { component } = mountWithRoute(<Character />, mockCharactersErrorData, {
-      initialRoute: "/projects/1",
-      currentPath: "/projects/:id",
+      initialRoute: "/characters/1",
+      currentPath: "/characters/:id",
     });
     await act(() => wait(0));
     component.update();
     expect(component.find(".error").length).toEqual(1);
+  });
+
+  it("Should render 'View Neighbours' button", async () => {
+    const { component } = mountWithRoute(<Character />, mockCharacterData, {
+      initialRoute: "/characters/1",
+      currentPath: "/characters/:id",
+    });
+    await act(() => wait(0));
+    component.update();
+    expect(component.find("#view-neighbours").length).toBeGreaterThan(0);
   });
 });

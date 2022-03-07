@@ -12,7 +12,7 @@ const Episode = () => {
   const [handlers, loading, data] = useOperations("episode", Number(params.id));
 
   if (loading) {
-    return <Loader />;
+    return <Loader id="loading" />;
   }
 
   const handleClick = (selecetedCharacterId: number) => {
@@ -22,6 +22,7 @@ const Episode = () => {
   const renderCharacters = () => {
     return data.episode.characters.map((item: CharacterType, index: number) => (
       <Card
+        key={index}
         image={item.image}
         data={{ title: item.name, id: item.id, description: item.status }}
         onClick={handleClick}
@@ -38,8 +39,8 @@ const Episode = () => {
               <TitleStyle>{data.episode.name}</TitleStyle>
             </div>
             <div className="row">
-              <p>Air Date: {data.episode.air_date}</p>
-              <p>Episode: {data.episode.episode}</p>
+              <p id="air-date">Air Date: {data.episode.air_date}</p>
+              <p id="episode">Episode: {data.episode.episode}</p>
             </div>
           </MainSectionStyled>
           <MainSectionStyled className="col-md-9">
