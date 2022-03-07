@@ -30,7 +30,6 @@ describe("Episodes Testing", () => {
     const { component } = mount(<Location />, mockLocationData);
     await act(() => wait(0));
     component.update();
-    console.log("qwe", component.find("DataTable").props().rows);
     expect(component.find("DataTable").props().rows).toEqual(sampleRow);
   });
 

@@ -17,8 +17,6 @@ const Location = () => {
   const [neighbours, setNeighbours] = useState([]);
   const [handlers, loading, data] = useOperations("location", Number(params.id));
 
-  console.log("handlers", handlers);
-
   useEffect(() => {
     if (data?.location?.residents && data?.location?.residents.length) {
       const slicedArr = data?.location.residents.slice(0, size);
