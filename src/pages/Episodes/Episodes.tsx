@@ -44,6 +44,7 @@ const Episodes = () => {
       </div>
       <div className="row">
         <Table
+          id="episodes-table"
           columnData={[
             {
               id: "name",

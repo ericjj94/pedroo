@@ -5,7 +5,7 @@ import Table from "../../components/Table/Table";
 import { CharacterType } from "../../state";
 import Loader from "../../components/Loader";
 import { TitleStyle } from "../../styled";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 const Characters = () => {
   const [charactersData, setCharactersData] = useState([]);
@@ -38,7 +38,7 @@ const Characters = () => {
   }, [data]);
 
   if (loading) {
-    return <Loader />;
+    return <Loader id="loading" />;
   }
 
   const handleOnRowClick = (selectedCharacterId: number) => {
@@ -52,6 +52,7 @@ const Characters = () => {
       </div>
       <div className="row">
         <Table
+          id="characters-table"
           columnData={[
             {
               id: "id",

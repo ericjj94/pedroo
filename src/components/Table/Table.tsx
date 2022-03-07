@@ -29,6 +29,7 @@ interface IDataTableProps {
   rowsPerPage: number;
   updateCurrentPage: Function;
   handleOnRowClick: Function;
+  id?: string;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -59,7 +60,7 @@ function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
     if (order !== 0) return order;
     return a[1] - b[1];
   });
-  console.warn(stabilizedThis);
+
   return stabilizedThis.map((el) => el[0]);
 }
 
@@ -101,6 +102,7 @@ const DataTable: React.FC<IDataTableProps> = ({
   setRowsPerPage,
   rowsPerPage,
   updateCurrentPage,
+  id,
   handleOnRowClick,
 }): JSX.Element => {
   let internalColumnData: IDataTableColumn[] = [
@@ -152,7 +154,7 @@ const DataTable: React.FC<IDataTableProps> = ({
 
   return (
     <React.Fragment>
-      <div>
+      <div id={id}>
         <Paper>
           <TableContainer>
             <Table aria-labelledby="tableTitle" aria-label="enhanced table">

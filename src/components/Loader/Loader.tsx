@@ -1,6 +1,10 @@
 import LoaderStyled from "./styled/LoaderStyles";
 
-const Loader = () => {
-  return <LoaderStyled />;
+interface LoaderInterface {
+  id?: string;
+}
+
+const Loader = ({ id }: LoaderInterface) => {
+  return <LoaderStyled id={id} />;
 };
 export default Loader;
