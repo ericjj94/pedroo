@@ -7,6 +7,7 @@ import { LocationType } from "../../state";
 import { TitleStyle } from "../../styled";
 import { useNavigate } from "react-router";
 import { formatTimestamp } from "../../utils/formatTimestamp";
+import Error from "../../components/Error";
 
 const Locations = () => {
   const [locationData, setLocationData] = useState([]);
@@ -35,8 +36,14 @@ const Locations = () => {
   if (loading) {
     return <Loader />;
   }
+
+  const onErrorButtonClick = () => {
+    setPage(0);
+    setCurrentPage(1);
+  };
+
   if (error) {
-    return <div className="error">Unable to fetch data</div>;
+    return <Error onButtonClick={onErrorButtonClick} />;
   }
 
   const updateCurrentPage = () => {

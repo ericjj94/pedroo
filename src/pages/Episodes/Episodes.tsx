@@ -5,6 +5,7 @@ import Table from "../../components/Table/Table";
 import Loader from "../../components/Loader";
 import { TitleStyle } from "../../styled";
 import { useNavigate } from "react-router";
+import Error from "../../components/Error";
 
 const Episodes = () => {
   const [episodesData, setEpisodesData] = useState([]);
@@ -28,8 +29,13 @@ const Episodes = () => {
   if (loading) {
     return <Loader />;
   }
+
+  const onErrorButtonClick = () => {
+    setPage(0);
+    setCurrentPage(1);
+  };
   if (error) {
-    return <div className="error">Unable to fetch data</div>;
+    return <Error onButtonClick={onErrorButtonClick} />;
   }
 
   const updateCurrentPage = () => {

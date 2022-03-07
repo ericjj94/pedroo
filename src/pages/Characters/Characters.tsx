@@ -6,6 +6,7 @@ import { CharacterType } from "../../state";
 import Loader from "../../components/Loader";
 import { TitleStyle } from "../../styled";
 import { useNavigate } from "react-router";
+import Error from "../../components/Error";
 
 const Characters = () => {
   const [charactersData, setCharactersData] = useState([]);
@@ -41,8 +42,13 @@ const Characters = () => {
     return <Loader id="loading" />;
   }
 
+  const onErrorButtonClick = () => {
+    setPage(0);
+    setCurrentPage(1);
+  };
+
   if (error) {
-    return <div className="error">Unable to fetch data</div>;
+    return <Error onButtonClick={onErrorButtonClick} />;
   }
 
   const handleOnRowClick = (selectedCharacterId: number) => {
