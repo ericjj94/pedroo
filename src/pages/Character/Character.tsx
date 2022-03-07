@@ -15,7 +15,7 @@ const Character = () => {
   const [characterEpisodes, setCharacterEpisodes] = useState([]);
   const params = useParams();
 
-  const [handlers, loading, data] = useOperations("character", Number(params.id));
+  const [handlers, loading, data, error] = useOperations("character", Number(params.id));
 
   useEffect(() => {
     if (data?.character?.episode && data?.character?.episode.length) {
@@ -25,7 +25,11 @@ const Character = () => {
   }, [data]);
 
   if (loading) {
-    return <Loader />;
+    return <Loader id="loading" />;
+  }
+
+  if (error) {
+    return <p className="error">Unable to fetch data</p>;
   }
 
   const handleEpisodeClick = (selectedEpisodeId: number) => {
@@ -50,7 +54,7 @@ const Character = () => {
   const renderShowAll = () => {
     if (!showAll && data.character.episode.length > 20) {
       return (
-        <div className="row">
+        <div className="row show-all">
           <ButtonStyle onClick={handleShowAll}>Show All</ButtonStyle>
         </div>
       );
@@ -84,8 +88,23 @@ const Character = () => {
           </MainSectionStyled>
           <MainSectionStyled className="col-md-9">
             <div className="row" style={{ justifyContent: "flex-end", gap: "0.5rem" }}>
-              <SmallButtonStyle>Edit</SmallButtonStyle>
-              <SmallButtonStyle info="danger">Delete</SmallButtonStyle>
+              <SmallButtonStyle
+                id="edit"
+                onClick={() => {
+                  handlers.edit(Number(params.id));
+                }}
+              >
+                Edit
+              </SmallButtonStyle>
+              <SmallButtonStyle
+                info="danger"
+                id="delete"
+                onClick={() => {
+                  handlers.delete(Number(params.id));
+                }}
+              >
+                Delete
+              </SmallButtonStyle>
             </div>
             <div className="row">
               <p>

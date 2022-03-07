@@ -9,8 +9,6 @@ const GET_CHARACTER = gql`
       species
       location {
         name
-        type
-        dimension
         id
       }
       image
