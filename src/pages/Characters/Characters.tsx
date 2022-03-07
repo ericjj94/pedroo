@@ -101,10 +101,6 @@ const Characters = () => {
               enableSort: true,
               align: "center",
             },
-            {
-              id: "action",
-              name: "Action",
-            },
           ]}
           rows={charactersData}
           page={page}

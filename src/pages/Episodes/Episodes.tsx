@@ -50,6 +50,12 @@ const Episodes = () => {
           id="episodes-table"
           columnData={[
             {
+              id: "id",
+              name: "Sno",
+              enableSort: true,
+              align: "center",
+            },
+            {
               id: "name",
               name: "Name",
               enableSort: true,
@@ -66,11 +72,6 @@ const Episodes = () => {
               name: "Episode",
               enableSort: true,
               align: "center",
-            },
-            {
-              id: "action",
-              name: "Action",
-              enableSort: true,
             },
           ]}
           rows={episodesData}

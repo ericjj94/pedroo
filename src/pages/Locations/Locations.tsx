@@ -85,11 +85,6 @@ const Locations = () => {
               enableSort: true,
               align: "center",
             },
-            {
-              id: "action",
-              name: "Action",
-              enableSort: true,
-            },
           ]}
           rows={locationData}
           page={page}
