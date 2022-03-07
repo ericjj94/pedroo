@@ -1,20 +1,15 @@
-import { useQuery } from "@apollo/client";
 import { useNavigate, useParams } from "react-router";
 import Card from "../../components/Card";
 import Loader from "../../components/Loader";
+import useOperations from "../../hooks/useOperations";
 import { CharacterType } from "../../state";
-import { MainSectionStyled, TitleStyle } from "../../styled";
-import { GET_EPISODE_BY_ID } from "./query";
+import { MainSectionStyled, SmallButtonStyle, TitleStyle } from "../../styled";
 
 const Episode = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const { loading, data } = useQuery(GET_EPISODE_BY_ID, {
-    variables: {
-      id: Number(params.id),
-    },
-  });
+  const [handlers, loading, data] = useOperations("episode", Number(params.id));
 
   if (loading) {
     return <Loader />;
@@ -48,6 +43,23 @@ const Episode = () => {
             </div>
           </MainSectionStyled>
           <MainSectionStyled className="col-md-9">
+            <div className="row" style={{ justifyContent: "flex-end", gap: "0.5rem" }}>
+              <SmallButtonStyle
+                onClick={() => {
+                  handlers.edit(Number(params.id));
+                }}
+              >
+                Edit
+              </SmallButtonStyle>
+              <SmallButtonStyle
+                info="danger"
+                onClick={() => {
+                  handlers.delete(Number(params.id));
+                }}
+              >
+                Delete
+              </SmallButtonStyle>
+            </div>
             <div className="row">
               <p>
                 The following characters were part of the episode <b>{data.episode.name}</b>

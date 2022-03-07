@@ -1,12 +1,11 @@
-import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Card from "../../components/Card";
 import Loader from "../../components/Loader";
+import useOperations from "../../hooks/useOperations";
 import { EpisodeType } from "../../state";
-import { ProfileImage, TitleStyle, ButtonStyle, MainSectionStyled } from "../../styled";
+import { ProfileImage, TitleStyle, ButtonStyle, MainSectionStyled, SmallButtonStyle } from "../../styled";
 import { formatTimestamp } from "../../utils/formatTimestamp";
-import { GET_CHARACTER } from "./query";
 
 const size = 20;
 
@@ -16,11 +15,7 @@ const Character = () => {
   const [characterEpisodes, setCharacterEpisodes] = useState([]);
   const params = useParams();
 
-  const { loading, data } = useQuery(GET_CHARACTER, {
-    variables: {
-      id: Number(params.id),
-    },
-  });
+  const [handlers, loading, data] = useOperations("character", Number(params.id));
 
   useEffect(() => {
     if (data?.character?.episode && data?.character?.episode.length) {
@@ -88,6 +83,10 @@ const Character = () => {
             </div>
           </MainSectionStyled>
           <MainSectionStyled className="col-md-9">
+            <div className="row" style={{ justifyContent: "flex-end", gap: "0.5rem" }}>
+              <SmallButtonStyle>Edit</SmallButtonStyle>
+              <SmallButtonStyle info="danger">Delete</SmallButtonStyle>
+            </div>
             <div className="row">
               <p>
                 {data.character.name} was a part of {data.character.episode.length} episodes. His information has been

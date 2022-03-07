@@ -1,25 +1,23 @@
-import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Card from "../../components/Card";
 import Loader from "../../components/Loader";
+import useOperations from "../../hooks/useOperations";
 import { LocationType } from "../../state";
-import { TitleStyle, ButtonStyle, MainSectionStyled } from "../../styled";
-import { GET_LOCATION_BY_ID } from "./query";
+import { TitleStyle, ButtonStyle, MainSectionStyled, SmallButtonStyle } from "../../styled";
 
 const size = 20;
 
 const Location = () => {
   const navigate = useNavigate();
+
   const [showAll, setShowAll] = useState(false);
   const params = useParams();
-  const [neighbours, setNeighbours] = useState([]);
 
-  const { loading, data } = useQuery(GET_LOCATION_BY_ID, {
-    variables: {
-      id: Number(params.id),
-    },
-  });
+  const [neighbours, setNeighbours] = useState([]);
+  const [handlers, loading, data] = useOperations("location", Number(params.id));
+
+  console.log("handlers", handlers);
 
   useEffect(() => {
     if (data?.location?.residents && data?.location?.residents.length) {
@@ -73,6 +71,23 @@ const Location = () => {
             </div>
           </MainSectionStyled>
           <MainSectionStyled className="col-md-9">
+            <div className="row" style={{ justifyContent: "flex-end", gap: "0.5rem" }}>
+              <SmallButtonStyle
+                onClick={() => {
+                  handlers.edit(params.id);
+                }}
+              >
+                Edit
+              </SmallButtonStyle>
+              <SmallButtonStyle
+                info="danger"
+                onClick={() => {
+                  handlers.delete(params.id);
+                }}
+              >
+                Delete
+              </SmallButtonStyle>
+            </div>
             <div className="row">
               <p>
                 {data.location.name} has {data.location.residents.length} residents. Following are the list of residents
