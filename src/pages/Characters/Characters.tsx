@@ -41,6 +41,10 @@ const Characters = () => {
     return <Loader id="loading" />;
   }
 
+  if (error) {
+    return <div className="error">Unable to fetch data</div>;
+  }
+
   const handleOnRowClick = (selectedCharacterId: number) => {
     navigate(`/characters/${selectedCharacterId}`);
   };

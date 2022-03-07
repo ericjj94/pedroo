@@ -173,6 +173,7 @@ const DataTable: React.FC<IDataTableProps> = ({
                         {Object.keys(row).map((key, index) => {
                           return (
                             <TableCell
+                              className="table-cell"
                               style={{ cursor: "pointer" }}
                               onClick={() => {
                                 handleOnRowClick(row.id);

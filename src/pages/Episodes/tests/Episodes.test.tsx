@@ -3,7 +3,7 @@ import Episodes from "../Episodes";
 import { mount } from "../../../helpers/mountHelpers";
 import { act } from "react-dom/test-utils";
 import { wait } from "@testing-library/user-event/dist/utils";
-import { mockEpisodesData, columns, sampleRow } from "./mockData";
+import { mockEpisodesData, sampleRow, mockErrorData } from "./mockData";
 
 describe("Episodes Testing", () => {
   it("Should return a component", () => {
@@ -28,10 +28,17 @@ describe("Episodes Testing", () => {
   });
   it("Should pass props to the Table component", async () => {
     const { component } = mount(<Episodes />, mockEpisodesData);
-    await act(() => wait(1));
+    await act(() => wait(0));
     component.update();
 
     expect(component.find("DataTable").props().rows).toEqual(sampleRow);
-    expect(component.find("DataTable").props().columnData).toEqual(columns);
+  });
+
+  it("Should render the error message", async () => {
+    const { component } = mount(<Episodes />, mockErrorData);
+    await act(() => wait(0));
+    component.update();
+    expect(component.find(".error").length).toEqual(1);
+    expect(component.find(".error").props().children).toEqual("Unable to fetch data");
   });
 });

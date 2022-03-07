@@ -21,30 +21,12 @@ export const mockEpisodesData = {
   },
 };
 
-export const columns = [
-  {
-    id: "name",
-    name: "Name",
-    enableSort: true,
-    align: "center",
+export const mockErrorData = {
+  request: {
+    query: GET_ALL_EPISODES,
+    variables: { page: 1 },
   },
-  {
-    id: "air_date",
-    name: "Air Date",
-    enableSort: true,
-    align: "center",
-  },
-  {
-    id: "episode",
-    name: "Episode",
-    enableSort: true,
-    align: "center",
-  },
-  {
-    id: "action",
-    name: "Action",
-    enableSort: true,
-  },
-];
+  error: new Error("Network error"),
+};
 
 export const sampleRow = [{ air_date: "Sun Nov 12 2003", episode: "SO1EO1", id: 1, name: "SOME EPISODE" }];

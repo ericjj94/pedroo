@@ -3,7 +3,7 @@ import Characters from "../Characters";
 import { mount } from "../../../helpers/mountHelpers";
 import { act } from "react-dom/test-utils";
 import { wait } from "@testing-library/user-event/dist/utils";
-import { mockCharactersData, columns, sampleRow } from "./mockData";
+import { mockCharactersData, sampleRow, mockCharactersErrorData } from "./mockData";
 
 describe("Characters Testing", () => {
   it("Should return a component", () => {
@@ -31,6 +31,13 @@ describe("Characters Testing", () => {
     await act(() => wait(1));
     component.update();
     expect(component.find("DataTable").props().rows).toEqual(sampleRow);
-    expect(component.find("DataTable").props().columnData).toEqual(columns);
+  });
+
+  it("Should render the error message", async () => {
+    const { component } = mount(<Characters />, mockCharactersErrorData);
+    await act(() => wait(0));
+    component.update();
+    expect(component.find(".error").length).toEqual(1);
+    expect(component.find(".error").props().children).toEqual("Unable to fetch data");
   });
 });

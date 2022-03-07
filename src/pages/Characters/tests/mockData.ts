@@ -1,26 +1,5 @@
 import { GET_ALL_CHARACTERS } from "../query";
 
-export const columns = [
-  { id: "id", name: "SNo", enableSort: true, align: "center" },
-  { id: "name", name: "Name", enableSort: true, align: "center" },
-  { id: "status", name: "Status", enableSort: true, align: "center" },
-  {
-    id: "species",
-    name: "Species",
-    enableSort: true,
-    align: "center",
-  },
-  { id: "gender", name: "gender", enableSort: true, align: "center" },
-  { id: "origin", name: "Origin", enableSort: true, align: "center" },
-  {
-    id: "location",
-    name: "Location",
-    enableSort: true,
-    align: "center",
-  },
-  { id: "action", name: "Action" },
-];
-
 export const sampleRow = [
   {
     id: "1",
@@ -60,4 +39,14 @@ export const mockCharactersData = {
       },
     },
   },
+};
+
+export const mockCharactersErrorData = {
+  request: {
+    query: GET_ALL_CHARACTERS,
+    variable: {
+      page: 1,
+    },
+  },
+  error: new Error("Network Error"),
 };
