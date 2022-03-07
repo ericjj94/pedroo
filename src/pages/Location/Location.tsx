@@ -3,16 +3,17 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Card from "../../components/Card";
 import Loader from "../../components/Loader";
-import { EpisodeType, LocationType } from "../../state";
-import { ProfileImage, TitleStyle, ButtonStyle, MainSectionStyled } from "../../styled";
+import { LocationType } from "../../state";
+import { TitleStyle, ButtonStyle, MainSectionStyled } from "../../styled";
 import { GET_LOCATION_BY_ID } from "./query";
 
 const size = 20;
 
-const Character = () => {
+const Location = () => {
   const navigate = useNavigate();
   const [showAll, setShowAll] = useState(false);
   const params = useParams();
+  const [neighbours, setNeighbours] = useState([]);
 
   const { loading, error, data } = useQuery(GET_LOCATION_BY_ID, {
     variables: {
@@ -20,18 +21,41 @@ const Character = () => {
     },
   });
 
+  useEffect(() => {
+    if (data?.location?.residents && data?.location?.residents.length) {
+      const slicedArr = data?.location.residents.slice(0, size);
+      setNeighbours(slicedArr);
+    }
+  }, [data]);
+
   if (loading) {
     return <Loader />;
   }
 
-  const handleCharactersClick = (selectedEpisodeId: number) => {
-    navigate(`/characters/${selectedEpisodeId}`);
+  const handleCharactersClick = (selectedCharacterId: number) => {
+    navigate(`/characters/${selectedCharacterId}`);
+  };
+
+  const handleShowAll = () => {
+    setShowAll(true);
+    setNeighbours(data.location.residents);
   };
 
   const renderResidents = () => {
-    return data.location.residents.map((item: LocationType, index: number) => (
+    return neighbours.map((item: LocationType, index: number) => (
       <Card onClick={handleCharactersClick} key={index} image={item.image} data={{ title: item.name, id: item.id }} />
     ));
+  };
+
+  const renderShowAll = () => {
+    if (!showAll && data.location.residents.length > 20) {
+      return (
+        <div className="row">
+          <ButtonStyle onClick={handleShowAll}>Show All</ButtonStyle>
+        </div>
+      );
+    }
+    return null;
   };
 
   if (data?.location) {
@@ -56,6 +80,7 @@ const Character = () => {
               </p>
             </div>
             <div className="row">{renderResidents()}</div>
+            {renderShowAll()}
           </MainSectionStyled>
         </div>
       </div>
@@ -63,4 +88,4 @@ const Character = () => {
   }
   return null;
 };
-export default Character;
+export default Location;
