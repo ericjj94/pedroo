@@ -5,6 +5,7 @@ import Card from "../../components/Card";
 import Loader from "../../components/Loader";
 import { EpisodeType } from "../../state";
 import { ProfileImage, TitleStyle, ButtonStyle, MainSectionStyled } from "../../styled";
+import { formatTimestamp } from "../../utils/formatTimestamp";
 import { GET_CHARACTER } from "./query";
 
 const size = 20;
@@ -90,8 +91,8 @@ const Character = () => {
             <div className="row">
               <p>
                 {data.character.name} was a part of {data.character.episode.length} episodes. His information has been
-                available since {` `} {new Date(data.character.created).toDateString()}. Following are the list of
-                episodes {` `} {data.character.name} played a part.
+                available since {` `} {formatTimestamp(data.character.created)}. Following are the list of episodes{" "}
+                {` `} {data.character.name} played a part.
               </p>
             </div>
             <div className="row">{renderEpisodes()}</div>

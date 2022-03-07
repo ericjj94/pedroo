@@ -1,6 +1,6 @@
 import React from "react";
 import Location from "../Locations";
-import { mount } from "../../../helpers/mountHelpers";
+import { mount } from "../../../utils/mountHelpers";
 import { act } from "react-dom/test-utils";
 import { wait } from "@testing-library/user-event/dist/utils";
 import { mockLocationData, sampleRow, mockErrorData } from "./mockData";

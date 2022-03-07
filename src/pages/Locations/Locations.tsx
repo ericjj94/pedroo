@@ -6,6 +6,7 @@ import Loader from "../../components/Loader";
 import { LocationType } from "../../state";
 import { TitleStyle } from "../../styled";
 import { useNavigate } from "react-router";
+import { formatTimestamp } from "../../utils/formatTimestamp";
 
 const Locations = () => {
   const [locationData, setLocationData] = useState([]);
@@ -25,7 +26,7 @@ const Locations = () => {
       const updatedResults = data?.locations?.results.map((item: LocationType) => ({
         ...item,
         id: item.id,
-        created: new Date(item.created).toDateString(),
+        created: formatTimestamp(item.created),
       }));
       setLocationData((prev) => [...prev, ...updatedResults] as []);
     }

@@ -1,6 +1,6 @@
 import React from "react";
 import Characters from "../Characters";
-import { mount } from "../../../helpers/mountHelpers";
+import { mount } from "../../../utils/mountHelpers";
 import { act } from "react-dom/test-utils";
 import { wait } from "@testing-library/user-event/dist/utils";
 import { mockCharactersData, sampleRow, mockCharactersErrorData } from "./mockData";
