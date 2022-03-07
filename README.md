@@ -58,7 +58,7 @@ Your app is ready to be deployed!
 ## Scope of Improvement
 
 1. Introducing the implementation of Intersection Observer will allow the lazy loading of images for an improved first paint on pages where images are rendered.
-2. Even though the application has redux added, it does not use the state management tool, since data as of now need not be required to be shared across multiple components.
+2. Redux should be added for ensuring the global state and sharing data between components
 3. The show more functionality in details component should actually fetch data when clicked. Currently, it renders the rest of the data present from the initial requests.
 4. Since the implementation of the Characters,Locations,Episodes are almost the same, it would be possible to create a wrapper component and let the component decide the rendering of the content needed. This is evident from the test cases as the test cases are identical for all three of them.
 5. Adding a theme to the application that would allow the user to change the theme of the app.
