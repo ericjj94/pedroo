@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
-import { GET_CHARACTER } from "../pages/Character/query";
+import { GET_CHARACTER_BY_ID } from "../pages/Character/query";
 import { GET_EPISODE_BY_ID } from "../pages/Episode/query";
 import { GET_LOCATION_BY_ID } from "../pages/Location/query";
 
@@ -24,7 +24,7 @@ const mapping = {
     EDIT: "EDIT_EPISODE",
   },
   character: {
-    GET: GET_CHARACTER,
+    GET: GET_CHARACTER_BY_ID,
     EDIT: "EDIT_CHARACTER",
   },
 };

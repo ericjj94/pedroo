@@ -1,8 +1,8 @@
-import { GET_CHARACTER } from "../query";
+import { GET_CHARACTER_BY_ID } from "../query";
 
 export const mockCharacterData = {
   request: {
-    query: GET_CHARACTER,
+    query: GET_CHARACTER_BY_ID,
     variables: { id: 1 },
   },
   result: {
@@ -32,7 +32,7 @@ export const mockCharacterData = {
 
 export const mockCharactersErrorData = {
   request: {
-    query: GET_CHARACTER,
+    query: GET_CHARACTER_BY_ID,
     variable: {
       id: 1,
     },
