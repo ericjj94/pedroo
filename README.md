@@ -38,7 +38,7 @@ The locations section contains information about all the locations mentioned in 
 
 3. npm i
 
-4. npm start - the app should start on localhost:3000
+4. npm start:dev - the app should start on localhost:3000
 
 ## Available Scripts for the application
 
@@ -46,11 +46,13 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the production build of app which is served from an express server
+
+Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
+
+### `npm run start:dev`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
 
 ### `npm test`
 
