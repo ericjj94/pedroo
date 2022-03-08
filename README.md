@@ -46,9 +46,9 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Open [http://localhost:8080](http://localhost:3000) to view it in the browser.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `npm run start:prod`
+### `npm run start:dev`
 
 Runs the production build of app which is served from an express server.
 
