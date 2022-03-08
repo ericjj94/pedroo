@@ -55,8 +55,6 @@ const Location = () => {
     return null;
   };
 
-  console.log("data.location", data.location);
-
   if (data?.location) {
     return (
       <div className="container mt-3">
