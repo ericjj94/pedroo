@@ -5,6 +5,7 @@ import Loader from "../../components/Loader";
 import useOperations from "../../hooks/useOperations";
 import { LocationType } from "../../state";
 import { TitleStyle, ButtonStyle, MainSectionStyled, SmallButtonStyle } from "../../styled";
+import { formatTimestamp } from "../../utils/formatTimestamp";
 
 const size = 20;
 
@@ -54,6 +55,8 @@ const Location = () => {
     return null;
   };
 
+  console.log("data.location", data.location);
+
   if (data?.location) {
     return (
       <div className="container mt-3">
@@ -61,11 +64,13 @@ const Location = () => {
           <MainSectionStyled className="col-md-3">
             <div className="row">
               <TitleStyle>{data.location.name}</TitleStyle>
-              <p>{data.location.species}</p>
+              <p>The dimensions of this location are {data.location.dimension}</p>
               <p>
-                Lives in <b>{data.location.name}</b>
+                This location is of type <b>{data.location.type}</b>
               </p>
-              <p>{data.location.status}</p>
+              <p>
+                This location has been available since <b>{formatTimestamp(data.location.created)}</b>
+              </p>
             </div>
           </MainSectionStyled>
           <MainSectionStyled className="col-md-9">
