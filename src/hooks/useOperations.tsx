@@ -55,6 +55,9 @@ function useOperations(type: string, id: number) {
           alert(`You want to delete the ${type} with id: ${selectedId} but it is yet to be implemented`);
           // TODO: implement delete functionality after a confirmation popup
         },
+        create: () => {
+          // TODO: implement the create based and render a UI to enter input fields
+        },
       };
     },
     [type]
