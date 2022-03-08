@@ -46,13 +46,13 @@ In the project directory, you can run:
 
 ### `npm start`
 
+Runs the production build of app which is served from an express server.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### `npm run start:dev`
 
-Runs the production build of app which is served from an express server.
-
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Any changes made in the source code would be reflected without reloading the page on the browser
 
 ### `npm test`
 
