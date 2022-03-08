@@ -48,11 +48,11 @@ function useOperations(type: string, id: number) {
       return {
         edit: (selectedId: number) => {
           console.log("type", type);
-          alert(`You want to edit the user with id: ${selectedId} but it is yet to be implemented`);
+          alert(`You want to edit the ${type} with id: ${selectedId} but it is yet to be implemented`);
           // TODO: implement edit operation by opening a modal and updating required fields
         },
         delete: (selectedId: number) => {
-          alert(`You want to delete the user with id: ${selectedId} but it is yet to be implemented`);
+          alert(`You want to delete the ${type} with id: ${selectedId} but it is yet to be implemented`);
           // TODO: implement delete functionality after a confirmation popup
         },
       };
