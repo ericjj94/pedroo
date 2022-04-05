@@ -4,7 +4,6 @@ import { GET_ALL_EPISODES } from "./query";
 import Loader from "../../components/Loader";
 import { ButtonStyle, TitleStyle } from "../../styled";
 import { useNavigate } from "react-router";
-import Error from "../../components/Error";
 import { EpisodeType } from "../../state";
 import Card from "../../components/Card";
 

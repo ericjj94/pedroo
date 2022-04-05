@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_LOCATIONS } from "./query";
-import Table from "../../components/Table/Table";
 import Loader from "../../components/Loader";
 import { LocationType } from "../../state";
-import { TitleStyle } from "../../styled";
+import { ButtonStyle, TitleStyle } from "../../styled";
 import { useNavigate } from "react-router";
 import { formatTimestamp } from "../../utils/formatTimestamp";
 import Error from "../../components/Error";
+import Card from "../../components/Card";
 
 const Locations = () => {
   const [locationData, setLocationData] = useState([]);
@@ -15,6 +15,7 @@ const Locations = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
+  const [totalPages, setTotalPages] = useState(0);
 
   const { loading, error, data } = useQuery(GET_ALL_LOCATIONS, {
     variables: {
@@ -29,13 +30,10 @@ const Locations = () => {
         id: item.id,
         created: formatTimestamp(item.created),
       }));
+      setTotalPages(data?.locations.info.pages);
       setLocationData((prev) => [...prev, ...updatedResults] as []);
     }
   }, [data]);
-
-  if (loading) {
-    return <Loader id="loading" />;
-  }
 
   const onErrorButtonClick = () => {
     setPage(0);
@@ -54,54 +52,40 @@ const Locations = () => {
     navigate(`/locations/${selectedCharacterId}`);
   };
 
+  const renderLocations = () => {
+    return locationData.map((item: LocationType, index: number) => (
+      <Card
+        data={{
+          title: item.name,
+          description: item.type,
+          id: item.id,
+        }}
+        onClick={handleOnRowClick}
+      />
+    ));
+  };
+
+  const renderShowAll = () => {
+    if (currentPage <= totalPages) {
+      return (
+        <div className="row show-all">
+          <ButtonStyle onClick={updateCurrentPage}>Show Next</ButtonStyle>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="container">
       <div className="row">
         <TitleStyle>Locations</TitleStyle>
       </div>
-      <div className="row">
-        <Table
-          columnData={[
-            {
-              id: "id",
-              name: "SNo",
-              enableSort: true,
-              align: "center",
-            },
-            {
-              id: "name",
-              name: "Name",
-              enableSort: true,
-              align: "center",
-            },
-            {
-              id: "type",
-              name: "Type",
-              enableSort: true,
-              align: "center",
-            },
-            {
-              id: "dimension",
-              name: "Dimension",
-              enableSort: true,
-              align: "center",
-            },
-            {
-              id: "created",
-              name: "Created",
-              enableSort: true,
-              align: "center",
-            },
-          ]}
-          rows={locationData}
-          page={page}
-          setPage={setPage}
-          setRowsPerPage={setRowsPerPage}
-          rowsPerPage={rowsPerPage}
-          updateCurrentPage={updateCurrentPage}
-          handleOnRowClick={handleOnRowClick}
-        />
+      <div className="row" style={{ opacity: loading ? 0.5 : 1 }}>
+        {renderLocations()}
       </div>
+      {loading ? <Loader /> : null}
+      {totalPages ? renderShowAll() : null}
     </div>
   );
 };
