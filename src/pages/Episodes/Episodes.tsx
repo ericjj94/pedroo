@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_EPISODES } from "./query";
-import Table from "../../components/Table/Table";
 import Loader from "../../components/Loader";
-import { TitleStyle } from "../../styled";
+import { ButtonStyle, TitleStyle } from "../../styled";
 import { useNavigate } from "react-router";
 import Error from "../../components/Error";
+import { EpisodeType } from "../../state";
+import Card from "../../components/Card";
 
 const Episodes = () => {
   const [episodesData, setEpisodesData] = useState([]);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const navigate = useNavigate();
 
   const { loading, error, data } = useQuery(GET_ALL_EPISODES, {
@@ -22,21 +22,10 @@ const Episodes = () => {
 
   useEffect(() => {
     if (data?.episodes?.results.length) {
+      setTotalPages(data.episodes.info.pages);
       setEpisodesData((prev) => [...prev, ...data?.episodes?.results] as []);
     }
   }, [data]);
-
-  if (loading) {
-    return <Loader />;
-  }
-
-  const onErrorButtonClick = () => {
-    setPage(0);
-    setCurrentPage(1);
-  };
-  if (error) {
-    return <Error onButtonClick={onErrorButtonClick} />;
-  }
 
   const updateCurrentPage = () => {
     setCurrentPage((prev) => prev + 1);
@@ -46,49 +35,37 @@ const Episodes = () => {
     navigate(`/episodes/${selectedCharacterId}`);
   };
 
+  const renderEpisodes = () => {
+    return episodesData.map((episode: EpisodeType, index: number) => (
+      <Card
+        data={{ title: episode.name, id: episode.id, description: episode.air_date }}
+        key={index}
+        onClick={handleOnRowClick}
+      />
+    ));
+  };
+
+  const renderShowAll = () => {
+    if (currentPage <= totalPages) {
+      return (
+        <div className="row show-all">
+          <ButtonStyle onClick={updateCurrentPage}>Show Next</ButtonStyle>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="container">
       <div className="row">
         <TitleStyle>Episodes</TitleStyle>
       </div>
-      <div className="row">
-        <Table
-          id="episodes-table"
-          columnData={[
-            {
-              id: "id",
-              name: "Sno",
-              enableSort: true,
-              align: "center",
-            },
-            {
-              id: "name",
-              name: "Name",
-              enableSort: true,
-              align: "center",
-            },
-            {
-              id: "air_date",
-              name: "Air Date",
-              enableSort: true,
-              align: "center",
-            },
-            {
-              id: "episode",
-              name: "Episode",
-              enableSort: true,
-              align: "center",
-            },
-          ]}
-          rows={episodesData}
-          page={page}
-          rowsPerPage={rowsPerPage}
-          setRowsPerPage={setRowsPerPage}
-          setPage={setPage}
-          updateCurrentPage={updateCurrentPage}
-          handleOnRowClick={handleOnRowClick}
-        />
+      <div className="row" style={{ opacity: loading ? 0.5 : 1 }}>
+        {renderEpisodes()}
       </div>
+      {loading ? <Loader /> : null}
+      {totalPages ? renderShowAll() : null}
     </div>
   );
 };
