@@ -91,8 +91,12 @@ const Location = () => {
             </div>
             <div className="row">
               <p>
-                {data.location.name} has {data.location.residents.length} residents. Following are the list of residents
-                on {` `} {data.location.name}.
+                {data.location.name} has {data.location.residents.length} residents.
+                {data.location.residents.length ? (
+                  <span>
+                    Following are the list of residents on {` `} {data.location.name}.{" "}
+                  </span>
+                ) : null}
               </p>
             </div>
             <div className="row">{renderResidents()}</div>
