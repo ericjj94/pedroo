@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_CHARACTERS } from "./query";
-import Table from "../../components/Table/Table";
 import { CharacterType } from "../../state";
 import Loader from "../../components/Loader";
-import { TitleStyle } from "../../styled";
+import { ButtonStyle, TitleStyle } from "../../styled";
 import { useNavigate } from "react-router";
 import Error from "../../components/Error";
+import Card from "../../components/Card";
 
 const Characters = () => {
   const [charactersData, setCharactersData] = useState([]);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
 
@@ -34,16 +33,12 @@ const Characters = () => {
           origin: item?.origin?.name,
         };
       });
+      setTotalPages(data.characters.info.pages);
       setCharactersData((prev) => [...prev, ...updatedData] as []);
     }
   }, [data]);
 
-  if (loading) {
-    return <Loader id="loading" />;
-  }
-
   const onErrorButtonClick = () => {
-    setPage(0);
     setCurrentPage(1);
   };
 
@@ -55,68 +50,38 @@ const Characters = () => {
     navigate(`/characters/${selectedCharacterId}`);
   };
 
+  const renderCharacters = () => {
+    return charactersData.map((item: CharacterType, index: number) => (
+      <Card
+        key={index}
+        data={{ title: item.name, description: item.status, id: item.id }}
+        image={item.image}
+        onClick={handleOnRowClick}
+      />
+    ));
+  };
+
+  const renderShowAll = () => {
+    if (currentPage <= totalPages) {
+      return (
+        <div className="row show-all">
+          <ButtonStyle onClick={updateCurrentPage}>Show Next</ButtonStyle>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="container">
       <div className="row">
         <TitleStyle>Characters</TitleStyle>
       </div>
-      <div className="row">
-        <Table
-          id="characters-table"
-          columnData={[
-            {
-              id: "id",
-              name: "SNo",
-              enableSort: true,
-              align: "center",
-            },
-            {
-              id: "name",
-              name: "Name",
-              enableSort: true,
-              align: "center",
-            },
-            {
-              id: "status",
-              name: "Status",
-              enableSort: true,
-              align: "center",
-            },
-            {
-              id: "species",
-              name: "Species",
-              enableSort: true,
-              align: "center",
-            },
-
-            {
-              id: "gender",
-              name: "gender",
-              enableSort: true,
-              align: "center",
-            },
-            {
-              id: "origin",
-              name: "Origin",
-              enableSort: true,
-              align: "center",
-            },
-            {
-              id: "location",
-              name: "Location",
-              enableSort: true,
-              align: "center",
-            },
-          ]}
-          rows={charactersData}
-          page={page}
-          setPage={setPage}
-          rowsPerPage={rowsPerPage}
-          setRowsPerPage={setRowsPerPage}
-          updateCurrentPage={updateCurrentPage}
-          handleOnRowClick={handleOnRowClick}
-        />
+      <div className="row" style={{ opacity: loading ? 0.5 : 1 }}>
+        {renderCharacters()}
       </div>
+      {loading ? <Loader /> : null}
+      {totalPages ? renderShowAll() : null}
     </div>
   );
 };
