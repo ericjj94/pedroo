@@ -20,6 +20,9 @@ export const mockCharactersData = {
   result: {
     data: {
       characters: {
+        info: {
+          pages: 10,
+        },
         results: [
           {
             id: "1",

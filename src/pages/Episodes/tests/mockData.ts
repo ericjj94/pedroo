@@ -8,6 +8,9 @@ export const mockEpisodesData = {
   result: {
     data: {
       episodes: {
+        info: {
+          pages: 10,
+        },
         results: [
           {
             id: 1,

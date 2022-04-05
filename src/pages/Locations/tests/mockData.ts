@@ -8,6 +8,9 @@ export const mockLocationData = {
   result: {
     data: {
       locations: {
+        info: {
+          pages: 10,
+        },
         results: [
           {
             id: 1,
