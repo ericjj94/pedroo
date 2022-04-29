@@ -10,7 +10,6 @@ const Card = ({ data: { title, description, id }, onClick, image }: CardInterfac
   return (
     <CardWrapper
       className="card"
-      style={{ boxShadow: "0.25px 0.5px 3px rgb(0 0 0.2)" }}
       onClick={() => {
         if (onClick) {
           onClick(id);
